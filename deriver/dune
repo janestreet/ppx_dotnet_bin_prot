@@ -1,0 +1,4 @@
+(library (name ppx_dotnet_bin_prot_deriver) (kind ppx_deriver)
+ (ppx_runtime_libraries dotnet_bin_prot)
+ (libraries base ppxlib ppx_dotnet_bin_prot_expander)
+ (preprocess (pps ppx_jane)))

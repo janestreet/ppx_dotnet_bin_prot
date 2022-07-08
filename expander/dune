@@ -1,0 +1,2 @@
+(library (name ppx_dotnet_bin_prot_expander) (libraries base ppxlib)
+ (preprocess (pps ppx_sexp_message ppx_let ppxlib.metaquot)))
