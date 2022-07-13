@@ -1,0 +1,4 @@
+(library (name dotnet_bin_prot_generator_test)
+ (libraries dotnet_bin_prot_generator dotnet_runner_lib
+  expect_test_helpers_async jenga_rules_integration sys_extended)
+ (preprocess (pps ppx_jane ppx_dotnet_bin_prot)))

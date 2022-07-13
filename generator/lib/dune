@@ -1,0 +1,4 @@
+(library (name dotnet_bin_prot_generator)
+ (libraries async core dotnet_bin_prot jenga_rules_integration
+  compiler-libs.common ppx_bin_prot ppxlib tempfile topological_sort)
+ (preprocess (pps ppx_jane ppxlib.metaquot)))
