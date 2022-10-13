@@ -222,8 +222,8 @@ let%expect_test "generated F# code looks reasonable" =
         | { dependency = v1; immediate = v2; built_in_overriden = v3;
             with_dependency_overriden = v4 } ->
             let pos =
-              (Test_project_name.Ppx.Ppx_dotnet_bin_prot.Generator.Test.Manifest_equality.T.bin_write_t
-                 _write_a _write_a) buf pos v1 in
+              Test_project_name.Ppx.Ppx_dotnet_bin_prot.Generator.Test.Manifest_equality.T.bin_write_t
+                _write_a _write_a buf pos v1 in
             let pos = bin_write_int64 buf pos v2 in
             let pos = bin_write_string buf pos v3 in
             Test_project_name.Override.bin_write_with_dependency buf pos v4
@@ -290,8 +290,8 @@ let%expect_test "generated F# code looks reasonable" =
         function
         | A_long_variant_name_to_force_newline v1 ->
             let pos = Bin_prot.Write.bin_write_int_8bit buf pos 0 in
-            (Test_project_name.Ppx.Ppx_dotnet_bin_prot.Generator.Test.Manifest_equality.T.bin_write_t
-               bin_write_unit bin_write_string) buf pos v1
+            Test_project_name.Ppx.Ppx_dotnet_bin_prot.Generator.Test.Manifest_equality.T.bin_write_t
+              bin_write_unit bin_write_string buf pos v1
       let bin_writer_variant =
         {
           Bin_prot.Type_class.size = bin_size_variant;
@@ -614,17 +614,17 @@ let%expect_test "generated F# code looks reasonable" =
             _write_b buf pos v1
         | Neither v1 ->
             let pos = Bin_prot.Write.bin_write_int_8bit buf pos 2 in
-            (Original_generated_1.bin_write_t _write_a _write_b) buf pos v1
+            Original_generated_1.bin_write_t _write_a _write_b buf pos v1
         | Poly v1 ->
             let pos = Bin_prot.Write.bin_write_int_8bit buf pos 3 in
             Original_generated_2.bin_write_t buf pos v1
         | Recursive v1 ->
             let pos = Bin_prot.Write.bin_write_int_8bit buf pos 4 in
-            (bin_write_original _write_a _write_b) buf pos v1
+            bin_write_original _write_a _write_b buf pos v1
         | Map v1 ->
             let pos = Bin_prot.Write.bin_write_int_8bit buf pos 5 in
-            (Test_project_name.Ppx.Ppx_dotnet_bin_prot.Runtime_lib.Dotnet_bin_prot.Generated_map.bin_write_t
-               bin_write_int64) buf pos v1
+            Test_project_name.Ppx.Ppx_dotnet_bin_prot.Runtime_lib.Dotnet_bin_prot.Generated_map.bin_write_t
+              bin_write_int64 buf pos v1
         | Set v1 ->
             let pos = Bin_prot.Write.bin_write_int_8bit buf pos 6 in
             Test_project_name.Ppx.Ppx_dotnet_bin_prot.Runtime_lib.Dotnet_bin_prot.Generated_set.bin_write_t
@@ -909,17 +909,17 @@ let%expect_test "generated F# code looks reasonable" =
             _write_b buf pos v1
         | Neither v1 ->
             let pos = Bin_prot.Write.bin_write_int_8bit buf pos 2 in
-            (Redefinition_generated_1.bin_write_t _write_a _write_b) buf pos v1
+            Redefinition_generated_1.bin_write_t _write_a _write_b buf pos v1
         | Poly v1 ->
             let pos = Bin_prot.Write.bin_write_int_8bit buf pos 3 in
             Redefinition_generated_2.bin_write_t buf pos v1
         | Recursive v1 ->
             let pos = Bin_prot.Write.bin_write_int_8bit buf pos 4 in
-            (bin_write_redefinition _write_a _write_b) buf pos v1
+            bin_write_redefinition _write_a _write_b buf pos v1
         | Map v1 ->
             let pos = Bin_prot.Write.bin_write_int_8bit buf pos 5 in
-            (Test_project_name.Ppx.Ppx_dotnet_bin_prot.Runtime_lib.Dotnet_bin_prot.Generated_map.bin_write_t
-               bin_write_int64) buf pos v1
+            Test_project_name.Ppx.Ppx_dotnet_bin_prot.Runtime_lib.Dotnet_bin_prot.Generated_map.bin_write_t
+              bin_write_int64 buf pos v1
         | Set v1 ->
             let pos = Bin_prot.Write.bin_write_int_8bit buf pos 6 in
             Test_project_name.Ppx.Ppx_dotnet_bin_prot.Runtime_lib.Dotnet_bin_prot.Generated_set.bin_write_t
@@ -1025,8 +1025,8 @@ let%expect_test "generated F# code looks reasonable" =
         let bin_write_t _write_a _write_b buf pos =
           function
           | { original = v1; redefinition = v2 } ->
-              let pos = (bin_write_original _write_a _write_b) buf pos v1 in
-              (bin_write_redefinition _write_a _write_b) buf pos v2
+              let pos = bin_write_original _write_a _write_b buf pos v1 in
+              bin_write_redefinition _write_a _write_b buf pos v2
         let bin_writer_t bin_writer_a bin_writer_b =
           {
             Bin_prot.Type_class.size =
@@ -1130,12 +1130,12 @@ let%expect_test "generated F# code looks reasonable" =
                  let size = Bin_prot.Common.(+) size (bin_size_string v1) in
                  Bin_prot.Common.(+) size (_size_of_a v2)) v
         let bin_write_t _write_a buf pos v =
-          (bin_write_list
-             (fun buf ->
-                fun pos ->
-                  function
-                  | (v1, v2) ->
-                      let pos = bin_write_string buf pos v1 in _write_a buf pos v2))
+          bin_write_list
+            (fun buf ->
+               fun pos ->
+                 function
+                 | (v1, v2) ->
+                     let pos = bin_write_string buf pos v1 in _write_a buf pos v2)
             buf pos v
         let bin_writer_t bin_writer_a =
           {
@@ -1184,7 +1184,7 @@ let%expect_test "generated F# code looks reasonable" =
       module Generated_set = struct
         type t = string list
         let bin_size_t v = bin_size_list bin_size_string v
-        let bin_write_t buf pos v = (bin_write_list bin_write_string) buf pos v
+        let bin_write_t buf pos v = bin_write_list bin_write_string buf pos v
         let bin_writer_t =
           {
             Bin_prot.Type_class.size = bin_size_t;
@@ -1296,6 +1296,6 @@ let%expect_test "generated F# code looks reasonable" =
       -------------------------------
       Ignoring non regular file: overrides
       ------------------------------- |}];
-    Dotnet_runner.build ~should_pack:true V3_1 ~project_directory:tmp_dir
+    Dotnet_runner.build ~should_pack:true V6_0 ~project_directory:tmp_dir
     |> Deferred.Or_error.ok_exn)
 ;;
